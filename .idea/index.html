@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PChome 會員登入 - 釣魚網站演示</title>
+  <title>會員登入-PChome 24購物</title>
+  <link rel="icon" type="image/webp" href="../img/unnamed.webp">
   <style>
     body {
       font-family: "Arial", Arial, sans-serif;
@@ -37,7 +38,7 @@
     .header-link {
       font-family: "Noto Sans TC","Montserrat","Roboto",Helvetica,Arial,sans-serif;
       color: #999999;
-      text-decoration: none;
+      /* text-decoration: none; */ /* 將由全域規則處理 */
       font-size: 12px;
       margin-right: 18px;
     }
@@ -93,22 +94,9 @@
       font-family: "Noto Sans TC","Montserrat","Roboto",Helvetica,Arial,sans-serif;
       font-weight: 595;
       color: #0090eb;
-      text-decoration: none;
+      /* text-decoration: none; */ /* 將由全域規則處理 */
     }
-    #loginStep1 .input-field{
-      width: 100%;
-      height: 40px;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-sizing: border-box;
-      margin-top: 7.5px;
-      margin-bottom: 15px;
-      font-size: 14px;
-      background-color: #fff;
-      transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
-      caret-color: #333;
-    }
+    #loginStep1 .input-field, /* 合併 .input-field 樣式 */
     #loginStep2 .input-field {
       width: 100%;
       height: 40px;
@@ -116,32 +104,51 @@
       border: 1px solid #ddd;
       border-radius: 8px;
       box-sizing: border-box;
-      margin-top: 3px;
-      margin-bottom: 15px;
       font-size: 14px;
       background-color: #fff;
       transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
       caret-color: #333;
     }
+    #loginStep1 .input-field { /* Step 1 input-field 特定 margin */
+      margin-top: 7.5px;
+      margin-bottom: 15px;
+    }
+    #loginStep2 .input-field { /* Step 2 input-field 特定 margin */
+      margin-top: 3px;
+      margin-bottom: 15px;
+    }
+
     #loginStep1 .input-field:focus,
     #loginStep2 .input-field:focus {
-      border-color: #ddd;
-      outline: none;
+      border-color: #ddd; /* 保持邊框顏色不變，游標顏色已在下方設定 */
+      outline: none; /* 保持移除輸入框的預設 focus outline */
+      caret-color: #fd4d4d; /* 游標變紅 */
+    }
+
+    .input-field.input-error { /* 統一的 input 錯誤樣式 */
+      border-color: #fd4d4d !important; /* 使用 !important 確保覆蓋 focus 樣式 */
       caret-color: #fd4d4d;
     }
 
-    #loginStep1 .input-field.input-error {
-      border-color: #fd4d4d;
-      caret-color: #fd4d4d;
-    }
+    /* 帳號錯誤訊息 (已存在) */
     #loginStep1 .error-message {
       color: #fd4d4d;
       font-size: 14px;
       text-align: left;
-      margin-top: -10px;
+      margin-top: -10px; /* 緊貼帳號輸入框 */
       margin-bottom: 10px;
       min-height: 1em;
     }
+    /* 通用錯誤訊息樣式，用於密碼 */
+    .error-message {
+      color: #fd4d4d;
+      font-size: 14px;
+      text-align: left;
+      margin-top: 5px; /* 給密碼錯誤訊息一點上方空間 */
+      margin-bottom: 10px;
+      min-height: 1em; /* 保持空間，避免跳動 */
+    }
+
     #loginStep1 .remember-account {
       font-family: "Noto Sans TC","Montserrat","Roboto",Helvetica,Arial,sans-serif;
       display: flex;
@@ -167,7 +174,7 @@
       font-family: "Noto Sans TC","Montserrat","Roboto",Helvetica,Arial,sans-serif;
       font-weight: 595;
       color: #0393dd;
-      text-decoration: none;
+      /* text-decoration: none; */ /* 將由全域規則處理 */
       font-size: 16px;
       margin-top: 3.5px;
     }
@@ -205,7 +212,7 @@
       font-weight: 595;
       text-align: center;
       color: #0090eb;
-      text-decoration: none;
+      /* text-decoration: none; */ /* 將由全域規則處理 */
     }
     #loginStep1 .divider {
       font-family: "Noto Sans TC","Montserrat","Roboto",Helvetica,Arial,sans-serif;
@@ -257,7 +264,7 @@
     }
     #loginStep1 .other-login-link {
       color: #0090eb;
-      text-decoration: none;
+      /* text-decoration: none; */ /* 將由全域規則處理 */
       font-size: 14px;
       font-weight: 550;
     }
@@ -299,8 +306,8 @@
       width: 24px; /* 請根據您的 GIF 調整 */
       height: 24px; /* 請根據您的 GIF 調整 */
     }
-    #loginStep2 .login-btn {
-      margin-top: 38px;
+    #loginStep2 .login-btn { /* Step 2 登入按鈕的 margin-top，確保與密碼錯誤提示有間距 */
+      margin-top: 15px; /* 原為 38px，因下方增加了錯誤提示，可酌情減少 */
       margin-bottom: 30px;
     }
     #loginStep2 .forgot-pw-link {
@@ -308,13 +315,13 @@
       display: block;
       text-align: center;
       color: #007bff;
-      text-decoration: none;
+      /* text-decoration: none; */ /* 將由全域規則處理 */
       font-size: 14px;
       font-weight: 500;
     }
-    #loginStep2 .forgot-pw-link:hover {
-      text-decoration: underline;
-    }
+    /* #loginStep2 .forgot-pw-link:hover { */ /* 將由全域規則處理 */
+    /* text-decoration: underline; */
+    /* } */
 
     /* --- Footer --- */
     .footer {
@@ -333,7 +340,7 @@
     }
     .footer-link {
       color: inherit;
-      text-decoration: none;
+      /* text-decoration: none; */ /* 將由全域規則處理 */
       margin: 0 5px;
     }
     .footer .footer-text-black {
@@ -349,9 +356,9 @@
       font-size: 12px;
       font-weight: normal;
     }
-    .footer a:hover {
-      text-decoration: underline;
-    }
+    /* .footer a:hover { */ /* 將由全域規則處理 */
+    /* text-decoration: underline; */
+    /* } */
 
     /* --- Alert Modal --- */
     .alert-modal {
@@ -408,6 +415,26 @@
       color: #ff9800;
       margin-bottom: 15px;
     }
+
+    /* --- 全域移除底線和外框 --- */
+    a,
+    a:link,
+    a:visited,
+    a:hover,
+    a:active,
+    a:focus {
+      text-decoration: none !important; /* 強制移除所有狀態下的底線 */
+      outline: none !important; /* 強制移除所有狀態下的外框 */
+      -moz-outline-style: none !important; /* 針對舊版 Firefox */
+    }
+
+    button,
+    button:hover,
+    button:active,
+    button:focus {
+      outline: none !important; /* 強制移除所有狀態下按鈕的外框 */
+      -moz-outline-style: none !important; /* 針對舊版 Firefox */
+    }
   </style>
 </head>
 <body>
@@ -421,44 +448,45 @@
   </div>
 </div>
 
-<div class="container"> <div id="loginStep1">
-  <h1 class="login-title">歡迎登入</h1>
-  <div class="no-account">
-    沒有 PChome 24h購物帳號？
-    <a href="#" class="register-link" onclick="showAlert()">立即註冊</a>
-  </div>
-  <input type="text" id="accountInputField" class="input-field" placeholder="請輸入手機號碼 或 Email">
-  <p id="accountError" class="error-message" style="display: none;"></p>
-  <div class="remember-account">
-    <input type="checkbox" id="remember" class="remember-checkbox" checked>
-    <label for="remember" class="remember-label">記住帳號</label>
-    <a href="#" class="forgot-pw" onclick="showAlert()">忘記密碼</a>
-  </div>
-  <button class="login-btn" onclick="switchToPasswordStep()">繼續</button>
-  <div class="terms-notice">
-    <span>登入帳號，即表示您已閱讀並同意 PChome 之</span>
-    <div> <a href="#" class="terms-link" onclick="showAlert()">會員條款 與 </a>
-      <a href="#" class="terms-link" onclick="showAlert()">客戶隱私權條款</a>
+<div class="container">
+  <div id="loginStep1">
+    <h1 class="login-title">歡迎登入</h1>
+    <div class="no-account">
+      沒有 PChome 24h購物帳號？
+      <a href="#" class="register-link" onclick="showAlert()">立即註冊</a>
+    </div>
+    <input type="text" id="accountInputField" class="input-field" placeholder="請輸入手機號碼 或 Email">
+    <p id="accountError" class="error-message" style="display: none;"></p>
+    <div class="remember-account">
+      <input type="checkbox" id="remember" class="remember-checkbox" checked>
+      <label for="remember" class="remember-label">記住帳號</label>
+      <a href="#" class="forgot-pw" onclick="showAlert()">忘記密碼</a>
+    </div>
+    <button class="login-btn" onclick="switchToPasswordStep()">繼續</button>
+    <div class="terms-notice">
+      <span>登入帳號，即表示您已閱讀並同意 PChome 之</span>
+      <div> <a href="#" class="terms-link" onclick="showAlert()">會員條款 與 </a>
+        <a href="#" class="terms-link" onclick="showAlert()">客戶隱私權條款</a>
+      </div>
+    </div>
+    <div class="divider">
+      <span class="divider-text">使用以下帳號快速登入</span>
+    </div>
+    <div class="social-login">
+      <div class="social-btn" onclick="showAlert()">
+        <img src="../img/2023_Facebook_icon.svg" alt="Facebook" width="24" height="24">
+      </div>
+      <div class="social-btn" onclick="showAlert()">
+        <img src="../img/Google__G__logo.svg.png" alt="Google" width="26" height="26">
+      </div>
+      <div class="social-btn" onclick="showAlert()">
+        <img src="../img/Apple_logo_black.svg" alt="Apple" width="19" height="24">
+      </div>
+    </div>
+    <div class="other-login">
+      <a href="#" class="other-login-link" onclick="showAlert()">使用其他 PChome 帳號登入</a>
     </div>
   </div>
-  <div class="divider">
-    <span class="divider-text">使用以下帳號快速登入</span>
-  </div>
-  <div class="social-login">
-    <div class="social-btn" onclick="showAlert()">
-      <img src="../img/2023_Facebook_icon.svg" alt="Facebook" width="24" height="24">
-    </div>
-    <div class="social-btn" onclick="showAlert()">
-      <img src="../img/Google__G__logo.svg.png" alt="Google" width="26" height="26">
-    </div>
-    <div class="social-btn" onclick="showAlert()">
-      <img src="../img/Apple_logo_black.svg" alt="Apple" width="19" height="24">
-    </div>
-  </div>
-  <div class="other-login">
-    <a href="#" class="other-login-link" onclick="showAlert()">使用其他 PChome 帳號登入</a>
-  </div>
-</div>
 
   <div id="loginStep2" style="display: none;">
     <h1 class="login-title">請輸入您的密碼</h1>
@@ -467,7 +495,8 @@
       <input type="password" id="passwordInputField" class="input-field" placeholder="請輸入密碼 (英文大小寫有差別)">
       <img src="../img/close.gif" alt="Show password" class="toggle-password" id="togglePasswordVisibilityBtn">
     </div>
-    <button class="login-btn" onclick="showAlert()">登入</button>
+    <p id="passwordError" class="error-message" style="display: none;"></p>
+    <button class="login-btn" onclick="validatePasswordAndLogin()">登入</button>
     <a href="#" class="forgot-pw-link" onclick="showAlert()">忘記密碼</a>
   </div>
 
@@ -502,11 +531,13 @@
 <div id="alertModal" class="alert-modal">
   <div class="alert-content">
     <div class="warning-icon">⚠️</div>
-    <div class="alert-title">釣魚網站警示!</div> <div class="alert-message"> <p><strong>警告：這是一個釣魚網站頁面！</strong></p>
-    <p>在真實的釣魚網站中，您的個人資料和密碼可能會被竊取。</p>
-    <p>請務必時刻檢查網址是否為官方正確的網址，並避免點擊來路不明的連結登入帳號。</p>
-    <p>提醒您，正確的PChome網址通常會是: <br>https://24h.pchome.com.tw/</p>
-  </div>
+    <div class="alert-title">釣魚網站警示!</div>
+    <div class="alert-message">
+      <p><strong>警告：這是一個釣魚網站頁面！</strong></p>
+      <p>在真實的釣魚網站中，您的個人資料和密碼可能會被竊取。</p>
+      <p>請務必時刻檢查網址是否為官方正確的網址，並避免點擊來路不明的連結登入帳號。</p>
+      <p>提醒您，正確的PChome網址通常會是: <br>https://ecvip.pchome.com.tw/</p>
+    </div>
     <button class="alert-btn" onclick="closeAlert()">我明白了</button>
   </div>
 </div>
@@ -520,6 +551,7 @@
   const passwordInputField = document.getElementById('passwordInputField');
   const togglePasswordVisibilityBtn = document.getElementById('togglePasswordVisibilityBtn');
   const mainContainerElement = document.querySelector('.container');
+  const passwordErrorElement = document.getElementById('passwordError');
 
   function showAlert() {
     document.getElementById('alertModal').style.display = 'flex';
@@ -570,6 +602,30 @@
     if (mainContainerElement) {
       mainContainerElement.classList.add('container-step2-active');
     }
+    if (passwordInputField.classList.contains('input-error')) {
+      passwordInputField.classList.remove('input-error');
+    }
+    if (passwordErrorElement.style.display === 'block') {
+      passwordErrorElement.style.display = 'none';
+      passwordErrorElement.textContent = '';
+    }
+    passwordInputField.value = '';
+  }
+
+  function validatePasswordAndLogin() {
+    const passwordValue = passwordInputField.value;
+
+    if (passwordValue === "") {
+      passwordInputField.classList.add('input-error');
+      passwordErrorElement.textContent = "請輸入密碼";
+      passwordErrorElement.style.display = 'block';
+      return;
+    } else {
+      passwordInputField.classList.remove('input-error');
+      passwordErrorElement.style.display = 'none';
+      passwordErrorElement.textContent = '';
+    }
+    showAlert();
   }
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -586,8 +642,6 @@
     }
 
     if (togglePasswordVisibilityBtn && passwordInputField) {
-      // 確保初始圖示正確 (密碼隱藏)
-      // **注意**：如果您 HTML 檔案與 img 資料夾同級，請將下方路徑改為 'img/close.gif' 和 'img/open.gif'
       togglePasswordVisibilityBtn.setAttribute('src', '../img/close.gif');
       togglePasswordVisibilityBtn.setAttribute('alt', 'Show password');
 
@@ -595,15 +649,24 @@
         const type = passwordInputField.getAttribute('type') === 'password' ? 'text' : 'password';
         passwordInputField.setAttribute('type', type);
 
-        // **注意**：如果您 HTML 檔案與 img 資料夾同級，請將下方路徑改為 'img/close.gif' 和 'img/open.gif'
         if (type === 'password') {
-          // 密碼隱藏時，顯示 "閉眼" 圖示
           this.setAttribute('src', '../img/close.gif');
           this.setAttribute('alt', 'Show password');
         } else {
-          // 密碼顯示時，顯示 "睜眼" 圖示
           this.setAttribute('src', '../img/open.gif');
           this.setAttribute('alt', 'Hide password');
+        }
+      });
+    }
+
+    if (passwordInputField && passwordErrorElement) {
+      passwordInputField.addEventListener('input', function() {
+        if (passwordInputField.classList.contains('input-error')) {
+          passwordInputField.classList.remove('input-error');
+        }
+        if (passwordErrorElement.style.display === 'block') {
+          passwordErrorElement.style.display = 'none';
+          passwordErrorElement.textContent = '';
         }
       });
     }
