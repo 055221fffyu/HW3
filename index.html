@@ -493,7 +493,7 @@
     <p class="account-info-text" id="passwordStepAccountInfo">請輸入與 [帳號] 連結的PChome 24h購物帳號密碼。</p>
     <div class="password-wrapper">
       <input type="password" id="passwordInputField" class="input-field" placeholder="請輸入密碼 (英文大小寫有差別)">
-      <img src="img/close.gif" alt="Show password" class="toggle-password" id="togglePasswordVisibilityBtn">
+      <img src="img/close.webp" alt="Show password" class="toggle-password" id="togglePasswordVisibilityBtn">
     </div>
     <p id="passwordError" class="error-message" style="display: none;"></p>
     <button class="login-btn" onclick="validatePasswordAndLogin()">登入</button>
@@ -642,7 +642,7 @@
     }
 
     if (togglePasswordVisibilityBtn && passwordInputField) {
-      togglePasswordVisibilityBtn.setAttribute('src', '../img/close.gif');
+      togglePasswordVisibilityBtn.setAttribute('src', '../img/close.webp');
       togglePasswordVisibilityBtn.setAttribute('alt', 'Show password');
 
       togglePasswordVisibilityBtn.addEventListener('click', function() {
@@ -650,10 +650,10 @@
         passwordInputField.setAttribute('type', type);
 
         if (type === 'password') {
-          this.setAttribute('src', '../img/close.gif');
+          this.setAttribute('src', '../img/close.webp');
           this.setAttribute('alt', 'Show password');
         } else {
-          this.setAttribute('src', '../img/open.gif');
+          this.setAttribute('src', '../img/open.webp');
           this.setAttribute('alt', 'Hide password');
         }
       });
