@@ -642,7 +642,7 @@
     }
 
     if (togglePasswordVisibilityBtn && passwordInputField) {
-      togglePasswordVisibilityBtn.setAttribute('src', '../img/close.webp');
+      togglePasswordVisibilityBtn.setAttribute('src', 'img/close.webp');
       togglePasswordVisibilityBtn.setAttribute('alt', 'Show password');
 
       togglePasswordVisibilityBtn.addEventListener('click', function() {
@@ -650,10 +650,10 @@
         passwordInputField.setAttribute('type', type);
 
         if (type === 'password') {
-          this.setAttribute('src', '../img/close.webp');
+          this.setAttribute('src', 'img/close.webp');
           this.setAttribute('alt', 'Show password');
         } else {
-          this.setAttribute('src', '../img/open.webp');
+          this.setAttribute('src', 'img/open.webp');
           this.setAttribute('alt', 'Hide password');
         }
       });
